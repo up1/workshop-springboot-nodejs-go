@@ -7,9 +7,14 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public UserResponse getUserById(@PathVariable int id) {
-
-        throw new UserNotFoundException(String.valueOf(id));
-//        return new UserResponse();
+//        throw new UserNotFoundException(String.valueOf(id));
+        // Hard code
+        UserResponse userResponse = new UserResponse();
+        userResponse.setId(id);
+        userResponse.setFirst_name("Somkiat");
+        userResponse.setEmail("somkiat@xx.com");
+        userResponse.setAge(35);
+        return userResponse;
     }
 
 }
