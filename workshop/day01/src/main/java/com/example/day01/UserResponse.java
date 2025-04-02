@@ -1,17 +1,20 @@
 package com.example.day01;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserResponse{
-	private String name;
+
 	private int id;
+	private String first_name;
 	private String email;
 	private int age;
 
-	public void setName(String name){
-		this.name = name;
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public String getName(){
-		return name;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
 	}
 
 	public void setId(int id){
@@ -42,8 +45,7 @@ public class UserResponse{
  	public String toString(){
 		return 
 			"UserResponse{" + 
-			"name = '" + name + '\'' + 
-			",id = '" + id + '\'' + 
+			",id = '" + id + '\'' +
 			",email = '" + email + '\'' + 
 			",age = '" + age + '\'' + 
 			"}";
