@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "417f042e-65fd-41b6-94b2-7a35aacd58e9",
+		"name": "testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1453931",
+		"_collection_link": "https://red-firefly-245852.postman.co/workspace/imc-rest~e6755644-bd64-4736-861a-edbed044130e/collection/1453931-417f042e-65fd-41b6-94b2-7a35aacd58e9?action=share&source=collection_link&creator=1453931"
+	},
+	"item": [
+		{
+			"name": "Get user by id :: success case",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var schema = {",
+							"    \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+							"    \"type\": \"object\",",
+							"    \"properties\": {",
+							"        \"id\": {",
+							"            \"type\": \"integer\"",
+							"        },",
+							"        \"name\": {",
+							"            \"type\": \"string\"",
+							"        },",
+							"        \"email\": {",
+							"            \"type\": \"string\",",
+							"            \"format\": \"email\"",
+							"        },",
+							"        \"age\": {",
+							"            \"type\": \"integer\"",
+							"        }",
+							"    },",
+							"    \"required\": [\"id\", \"name\", \"email\", \"age\"]",
+							"};",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test('Schema is valid', function () {",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://10fb76b2-1bdd-4a43-9734-e1a024596f74.mock.pstmn.io/user/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id :: not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"var schema = {",
+							"    \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+							"    \"type\": \"object\",",
+							"    \"properties\": {",
+							"        \"message\": {",
+							"            \"type\": \"string\"",
+							"        }",
+							"    },",
+							"    \"required\": [\"message\"]",
+							"};",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test('Schema is valid', function () {",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://10fb76b2-1bdd-4a43-9734-e1a024596f74.mock.pstmn.io/user/2"
+			},
+			"response": []
+		}
+	]
+}
