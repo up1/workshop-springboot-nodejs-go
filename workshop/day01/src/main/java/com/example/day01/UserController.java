@@ -7,7 +7,9 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public UserResponse getUserById(@PathVariable int id) {
-        return new UserResponse();
+
+        throw new UserNotFoundException();
+//        return new UserResponse();
     }
 
 }
