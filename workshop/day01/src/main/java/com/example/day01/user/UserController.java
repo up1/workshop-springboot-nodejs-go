@@ -1,4 +1,4 @@
-package com.example.day01;
+package com.example.day01.user;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +8,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public UserResponse getUserById(@PathVariable int id) {
 //        throw new UserNotFoundException(String.valueOf(id));
-        // Hard code
+//        Hard code
         UserResponse userResponse = new UserResponse();
         userResponse.setId(id);
         userResponse.setFirst_name("Somkiat");

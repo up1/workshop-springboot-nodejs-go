@@ -1,6 +1,4 @@
-package com.example.day01;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.example.day01.user;
 
 public class UserResponse{
 
