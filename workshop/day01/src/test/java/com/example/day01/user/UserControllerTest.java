@@ -1,5 +1,6 @@
 package com.example.day01.user;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,7 @@ class UserControllerTest {
     TestRestTemplate restTemplate;
 
     @Test
+    @DisplayName("ทำการดึงข้อมูลของ user id = 1 สำเร็จ")
     void getUserById() {
         UserResponse actualResult
                 = restTemplate.getForObject("/user/1", UserResponse.class);
