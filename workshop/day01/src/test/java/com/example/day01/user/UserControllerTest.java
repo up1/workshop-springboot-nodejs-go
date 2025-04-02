@@ -23,6 +23,13 @@ class UserControllerTest {
         assertEquals(1, actualResult.getId());
         assertEquals("Somkiat", actualResult.getFirst_name());
         assertEquals("somkiat@xx.com", actualResult.getEmail());
+    }
 
+    @Test
+    @DisplayName("ไม่พบข้อมูลของ user id = 2")
+    void case02() {
+        UserErrorResponse actualResult
+                = restTemplate.getForObject("/user/2", UserErrorResponse.class);
+        assertEquals("User id=2 not found", actualResult.getMessage());
     }
 }
