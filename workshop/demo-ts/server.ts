@@ -7,6 +7,8 @@ export class Server {
 
   constructor(port: number = 3000) {
     this.app = express();
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
     this.port = port;
     this.setupRoutes();
   }

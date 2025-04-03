@@ -1,10 +1,23 @@
 import { Application, Request, Response } from "express";
+import { Database } from "./database";
+import { MyProduct } from "./models/product_model";
 
 export class Product {
   private app: Application;
+  private database: Database;
 
   constructor(app: Application) {
     this.app = app;
+    this.database = Database.getInstance();
+    this.database
+      .getSequelize()
+      .sync()
+      .then(() => {
+        console.log("Database synchronized successfully.");
+      })
+      .catch((error: Error) => {
+        console.error("Error synchronizing database:", error);
+      });
     this.setupRoutes();
   }
 
@@ -13,21 +26,44 @@ export class Product {
     this.app.post("/product", this.createProduct.bind(this));
   }
 
-  private createProduct(req: Request, res: Response): void {
+  private async createProduct(req: Request, res: Response): Promise<void> {
     const newProduct = req.body;
-    res.status(201).json({ 
-        message: "Product created successfully",
-        product: newProduct
+    console.log("Creating product:", newProduct);
+
+    const product = new MyProduct({
+      name: newProduct.name,
+      price: newProduct.price,
+      quantity: newProduct.quantity,
     });
+    try {
+      await product.save();
+      console.log("Product created successfully.");
+      res.status(201).json(newProduct);
+    } catch (error: any) {
+      console.error("Error creating product:", error);
+      res.status(500).json({
+        message: "Error creating product",
+        error: error.message,
+      });
+    }
   }
-  
-  private getProductById(req: Request, res: Response): void {
+
+  private async getProductById(req: Request, res: Response): Promise<void> {
     const productId = req.params.id;
-    res.status(200).json({ 
-        id: productId,
-        name: "Sample Product",
-        price: 100.50,
-        description: "This is a sample product description."
+
+    const product = await MyProduct.findByPk(productId);
+    if (!product) {
+      console.log("Product not found");
+      res.status(404).json({ message: "Product not found" });
+      return;
+    }
+    console.log("Product found:", product);
+
+    res.status(200).json({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: product.quantity,
     });
   }
 }
