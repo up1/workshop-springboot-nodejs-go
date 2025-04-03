@@ -23,9 +23,10 @@ class UserControllerTest {
     void getUserById() {
         // Arrange
         MyUser user1 = new MyUser();
-        user1.setId(1);
-        user1.setFirstName("Test");
-        userRepository.save(user1);
+        user1.setFirstName("Somkiat");
+        user1.setEmail("somkiat@xx.com");
+        user1.setAge(35);
+        user1 = userRepository.save(user1);
 
         UserResponse actualResult
                 = restTemplate.getForObject("/user/1", UserResponse.class);
