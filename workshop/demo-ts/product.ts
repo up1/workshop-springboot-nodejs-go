@@ -60,11 +60,11 @@ export class Product {
         price: savedProduct.price,
         quantity: savedProduct.quantity,
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error creating product:", error);
       res.status(500).json({
         message: "Error creating product",
-        error: error.message,
+        error: error instanceof Error ? error.message : "Unknown error",
       });
     }
   }
