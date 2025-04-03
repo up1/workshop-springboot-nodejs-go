@@ -1,6 +1,7 @@
 package com.example.cache.products;
 
 
+import jakarta.validation.Valid;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,7 +29,7 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public Product editProduct(@RequestBody Product product) {
+    public Product editProduct(@Valid @RequestBody Product product) {
         return productRepository.save(product);
     }
 
