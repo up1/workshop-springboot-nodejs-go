@@ -1,4 +1,5 @@
 import { Application, Request, Response } from "express";
+import Joi from "joi";
 import { Database } from "./database";
 import { MyProduct } from "./models/product_model";
 
@@ -28,8 +29,30 @@ export class Product {
 
   private async createProduct(req: Request, res: Response): Promise<void> {
     const newProduct = req.body;
-    console.log("Creating product:", newProduct);
+    // Check if the request body has the correct data types
+    if (!req.is('application/json')) {
+      res.status(400).json({ error: 'Invalid content type' });
+      return;
+    }
 
+    // Validate the request body with joi
+    const productSchema = Joi.object({
+      name: Joi.string().required(),
+      code: Joi.string().required(),
+      price: Joi.number().required(),
+      quantity: Joi.number().required(),
+    });
+    const { error } = productSchema.validate(newProduct);
+    if (error) {
+      console.error("Validation error:", error.details[0].message);
+      res.status(400).json({
+        message: "Validation error",
+        error: error.details[0].message,
+      });
+      return;
+    }
+
+    console.log("Creating product:", newProduct);
     const product = new MyProduct({
       name: newProduct.name,
       price: newProduct.price,
