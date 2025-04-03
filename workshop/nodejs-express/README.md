@@ -18,3 +18,5 @@ $npm i -D nodemon
 ```
 $npm run dev
 ```
+
+Let's go to workshop
