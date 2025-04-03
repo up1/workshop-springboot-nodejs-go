@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "40f40c35-1b9d-488e-9e01-9320f46bff70",
+		"name": "users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1453931",
+		"_collection_link": "https://red-firefly-245852.postman.co/workspace/imc-rest~e6755644-bd64-4736-861a-edbed044130e/collection/1453931-40f40c35-1b9d-488e-9e01-9320f46bff70?action=share&source=collection_link&creator=1453931"
+	},
+	"item": [
+		{
+			"name": "Hello",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000"
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Add new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"demo\",\n   \"age\": 123\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/users"
+			},
+			"response": []
+		}
+	]
+}
