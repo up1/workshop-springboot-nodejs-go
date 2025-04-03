@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"time"
 
@@ -15,6 +16,9 @@ import (
 
 func GetProductByID(c echo.Context) error {
 	id := c.Param("id")
+
+	// Write log
+	slog.Info("Fetching product", "id", id, "method", c.Request().Method, "path", c.Request().URL.Path)
 
 	// Try Redis
 	cached, err := redis.Rdb.Get(redis.Ctx, id).Result()
