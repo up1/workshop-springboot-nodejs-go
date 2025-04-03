@@ -10,15 +10,6 @@ export class Product {
   constructor(app: Application) {
     this.app = app;
     this.database = Database.getInstance();
-    this.database
-      .getSequelize()
-      .sync()
-      .then(() => {
-        console.log("Database synchronized successfully.");
-      })
-      .catch((error: Error) => {
-        console.error("Error synchronizing database:", error);
-      });
     this.setupRoutes();
   }
 
@@ -55,13 +46,20 @@ export class Product {
     console.log("Creating product:", newProduct);
     const product = new MyProduct({
       name: newProduct.name,
+      code: newProduct.code,
       price: newProduct.price,
       quantity: newProduct.quantity,
     });
     try {
-      await product.save();
+      const savedProduct = await product.save();
       console.log("Product created successfully.");
-      res.status(201).json(newProduct);
+      res.status(201).json({
+        id: savedProduct.id,
+        name: savedProduct.name,
+        code: savedProduct.code,
+        price: savedProduct.price,
+        quantity: savedProduct.quantity,
+      });
     } catch (error: any) {
       console.error("Error creating product:", error);
       res.status(500).json({
