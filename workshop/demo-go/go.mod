@@ -8,6 +8,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/redis/go-redis/v9 v9.7.3
 	github.com/samber/slog-echo v1.16.1
+	github.com/xeipuuv/gojsonschema v1.2.0
 )
 
 require (
@@ -19,6 +20,8 @@ require (
 	github.com/samber/lo v1.49.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
+	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
+	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	go.opentelemetry.io/otel v1.29.0 // indirect
 	go.opentelemetry.io/otel/trace v1.29.0 // indirect
 	golang.org/x/crypto v0.35.0 // indirect

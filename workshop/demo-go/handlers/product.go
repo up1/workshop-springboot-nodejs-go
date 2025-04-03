@@ -12,6 +12,7 @@ import (
 	"demo/redis"
 
 	"github.com/labstack/echo/v4"
+	"github.com/xeipuuv/gojsonschema"
 )
 
 func GetProductByID(c echo.Context) error {
@@ -46,11 +47,36 @@ func GetProductByID(c echo.Context) error {
 
 func CreateProduct(c echo.Context) error {
 	var p models.Product
+	// Bind request body to product struct
 	if err := c.Bind(&p); err != nil {
 		return c.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid request"})
 	}
 
-	err := db.DB.QueryRow(
+	// Define JSON schema for validation
+	schema := `{
+		"type": "object",
+		"required": ["name", "code", "quantity", "price"],
+		"properties": {
+			"name": {"type": "string", "minLength": 1},
+			"code": {"type": "string", "minLength": 1},
+			"quantity": {"type": "number", "minimum": 0},
+			"price": {"type": "number", "minimum": 0}
+		}
+	}`
+
+	loader := gojsonschema.NewStringLoader(schema)
+	document := gojsonschema.NewGoLoader(p)
+
+	result, err := gojsonschema.Validate(loader, document)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, echo.Map{"error": "Schema validation error"})
+	}
+
+	if !result.Valid() {
+		return c.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid product data"})
+	}
+
+	err = db.DB.QueryRow(
 		"INSERT INTO products(name, code, quantity, price) VALUES($1, $2, $3, $4) RETURNING id",
 		p.Name, p.Code, p.Quantity, p.Price,
 	).Scan(&p.ID)
