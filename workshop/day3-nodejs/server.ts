@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import { Product } from './product';
 
 class Server {
   private app: Application;
@@ -10,6 +11,7 @@ class Server {
     this.app.use(express.urlencoded({ extended: true }));
     this.port = port;
     this.setupRoutes();
+    new Product(this.app);
   }
 
   private setupRoutes(): void {
