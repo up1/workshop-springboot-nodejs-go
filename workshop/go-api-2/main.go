@@ -14,9 +14,13 @@ func main() {
 
 	redis.Init()
 
+	xxx := handlers.XXX{
+		MyDB: db,
+	}
+
 	e := echo.New()
 
-	e.GET("/product/:id", handlers.GetProductByID(db))
+	e.GET("/product/:id", xxx.GetProductByID)
 	e.POST("/product", handlers.CreateProduct)
 
 	e.Logger.Fatal(e.Start(":8080"))
