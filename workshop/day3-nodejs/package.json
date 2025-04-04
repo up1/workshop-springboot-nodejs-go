@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "ts-node server.ts",
     "start": "rm -rf ./dist && tsc --outDir ./dist && node ./dist/server.js",
+    "lint": "eslint '**/*.ts'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,9 +13,12 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@types/express": "^5.0.1",
+    "eslint": "^9.23.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.29.0"
   },
   "dependencies": {
     "express": "^5.1.0"
