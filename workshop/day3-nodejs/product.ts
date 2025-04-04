@@ -1,10 +1,12 @@
 import { Application, Request, Response } from 'express';
+import { Database } from './database';
 
 export class Product {
   private app: Application;
 
   constructor(app: Application) {
     this.app = app;
+    Database.getInstance();
     this.setupRoutes();
   }
 
