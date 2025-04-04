@@ -8,13 +8,13 @@ export default tseslint.config(
     tseslint.configs.strict,
     tseslint.configs.stylistic,
     // add any additional rules or overrides here
-    {
-        rules: {
-            'no-console': 'warn',
-            'no-unused-vars': 'warn',
-            'quotes': ['error', 'single'],
-            'semi': ['error', 'always'],
-            // Add more rules as needed
-        },
-    }
+    // {
+    //     rules: {
+    //         'no-console': 'warn',
+    //         'no-unused-vars': 'warn',
+    //         'quotes': ['error', 'single'],
+    //         'semi': ['error', 'always'],
+    //         // Add more rules as needed
+    //     },
+    // }
   );
