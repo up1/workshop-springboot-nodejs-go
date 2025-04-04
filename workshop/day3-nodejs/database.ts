@@ -14,6 +14,7 @@ export class Database {
       password: process.env.POSTGRES_PASSWORD,
       username: process.env.POSTGRES_USERNAME,
       models: [MyProduct], //  your models
+      logging: true, // enable logging
     });
     this.sequelize.sync({ force: true });
   }
