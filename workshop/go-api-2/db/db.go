@@ -10,9 +10,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var DB *sql.DB
+// var DB *sql.DB
 
-func Init() {
+func CreateDbConnection() *sql.DB {
 	var err error
 	dbHost := os.Getenv("POSTGRES_HOST")
 	dbPort := os.Getenv("POSTGRES_PORT")
@@ -22,11 +22,12 @@ func Init() {
 
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		dbHost, dbPort, dbUser, dbPassword, dbName)
-	DB, err = sql.Open("postgres", connStr)
+	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal("PostgreSQL connection error:", err)
 	}
-	if err = DB.Ping(); err != nil {
+	if err = db.Ping(); err != nil {
 		log.Fatal("Unable to reach the database:", err)
 	}
+	return db
 }
